@@ -1,15 +1,26 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="org.codeweaver.eqbeats"
-    android:versionCode="1"
-    android:versionName="1.0">
+          package="org.codeweaver.eqbeats"
+          android:versionCode="1"
+          android:versionName="1.0">
 
-    <uses-sdk android:minSdkVersion="14" android:targetSdkVersion="17" />
+    <uses-sdk
+            android:minSdkVersion="14"
+            android:targetSdkVersion="17"/>
 
-    <application android:allowBackup="true"
-        android:label="@string/app_name"
-        android:icon="@drawable/ic_launcher"
-        android:theme="@style/AppTheme">
+    <application
+            android:allowBackup="true"
+            android:name=".EQBeats"
+            android:label="@string/app_name"
+            android:icon="@drawable/ic_launcher"
+            android:logo="@drawable/ic_logo"
+            android:theme="@style/AppTheme">
 
+        <receiver android:name=".receivers.NetworkStatusReceiver">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
+                <action android:name="android.net.wifi.WIFI_STATE_CHANGED"/>
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
