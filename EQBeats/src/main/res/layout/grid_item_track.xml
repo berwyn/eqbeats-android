@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="#FFF">
+
+    <org.codeweaver.eqbeats.widget.SquareImage
+            android:id="@+id/track_art"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_logo"/>
+
+    <TextView
+            android:id="@+id/track_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Track title"
+            android:textStyle="bold"
+            android:padding="8dp"/>
+
+</LinearLayout>
