@@ -10,6 +10,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:scaleType="centerCrop"
+            android:paddingBottom="4dp"
             android:src="@drawable/ic_logo"/>
 
     <TextView
@@ -17,9 +18,24 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:singleLine="true"
-            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textAppearance="?android:attr/textAppearanceSmall"
             android:text="Track title"
-            android:textStyle="bold"
-            android:padding="8dp"/>
+            android:paddingBottom="4dp"
+            android:paddingTop="4dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"/>
+
+    <TextView
+            android:id="@+id/track_artist"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:textSize="12sp"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Track artist"
+            android:textStyle="italic"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:paddingBottom="8dp"/>
 
 </LinearLayout>

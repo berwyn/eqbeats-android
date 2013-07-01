@@ -4,8 +4,11 @@
     <string name="app_name">EQBeats</string>
     <string name="title_activity_main">EQBeats</string>
     <string name="action_settings">Settings</string>
-    <string name="title_section1">Section 1</string>
-    <string name="title_section2">Section 2</string>
-    <string name="title_section3">Section 3</string>
+    <string name="title_section1">Featured</string>
+    <string name="title_section2">Latest</string>
+    <string name="title_section3">Random</string>
+    <string name="error_track_fetch">Couldn\'t get the track you requested</string>
+    <string name="error_tracks_fetch">Couldn\'t get the tracks you requested</string>
+    <string name="track_artist_text">by %1s</string>
 
 </resources>

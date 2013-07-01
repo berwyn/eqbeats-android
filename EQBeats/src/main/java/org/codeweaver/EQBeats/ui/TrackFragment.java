@@ -3,18 +3,28 @@ package org.codeweaver.eqbeats.ui;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
 import android.widget.TextView;
 
+import org.codeweaver.eqbeats.BuildConfig;
+import org.codeweaver.eqbeats.EQBeats;
+import org.codeweaver.eqbeats.EQBeatsAPI;
 import org.codeweaver.eqbeats.R;
 import org.codeweaver.eqbeats.adapters.TrackListAdapter;
-import org.codeweaver.eqbeats.dummy.DummyContent;
+import org.codeweaver.eqbeats.model.Track;
+
+import java.util.Arrays;
+
+import de.keyboardsurfer.android.widget.crouton.Crouton;
+import de.keyboardsurfer.android.widget.crouton.Style;
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 /**
  * A fragment representing a list of Items.
@@ -22,29 +32,33 @@ import org.codeweaver.eqbeats.dummy.DummyContent;
  * Large screen devices (such as tablets) are supported by replacing the
  * ListView with a GridView.
  * <p />
- * Activities containing this fragment MUST implement the {@link Callbacks}
- * interface.
+ * Activities containing this fragment MUST implement the
+ * {@link OnFragmentInteractionListener} interface.
  */
 public class TrackFragment extends Fragment implements
 		AbsListView.OnItemClickListener {
 
-	private OnFragmentInteractionListener mListener;
+	private static final String				BUNDLE_KEY_ENDPOINT	= "endpoint";
+	private static final String				TAG					= "Track Fragment";
+
+	private OnFragmentInteractionListener	listener;
 
 	/**
 	 * The fragment's ListView/GridView.
 	 */
-	private AbsListView mListView;
+	private AbsListView						listView;
 
 	/**
 	 * The Adapter which will be used to populate the ListView/GridView with
 	 * Views.
 	 */
-	private ListAdapter mAdapter;
+	private TrackListAdapter				listAdapter;
 
 	// TODO: Rename and change types of parameters
-	public static TrackFragment newInstance() {
+	public static TrackFragment newInstance(Endpoint endpoint) {
 		TrackFragment fragment = new TrackFragment();
 		Bundle args = new Bundle();
+		args.putString(BUNDLE_KEY_ENDPOINT, endpoint.name());
 		fragment.setArguments(args);
 		return fragment;
 	}
@@ -54,7 +68,7 @@ public class TrackFragment extends Fragment implements
 	 * fragment (e.g. upon screen orientation changes).
 	 */
 	public TrackFragment() {
-        setRetainInstance(true);
+		setRetainInstance(true);
 	}
 
 	@Override
@@ -62,22 +76,41 @@ public class TrackFragment extends Fragment implements
 		super.onCreate(savedInstanceState);
 
 		if (getArguments() != null) {
+			if (getArguments().containsKey(BUNDLE_KEY_ENDPOINT)) {
+				Endpoint endpoint = Endpoint.valueOf(getArguments().getString(
+						BUNDLE_KEY_ENDPOINT));
+				EQBeatsAPI api = ((EQBeats) getActivity().getApplication())
+						.getApi();
+				switch (endpoint) {
+					case FEATURED:
+						api.getFeaturedTracks(generateCallback());
+						break;
+					case LATEST:
+						api.getLatestTracks(generateCallback());
+						break;
+					case RANDOM:
+					default:
+						api.getRandomTracks(generateCallback());
+						break;
+				}
+			}
 		}
 
-		mAdapter = new TrackListAdapter(getActivity());
+		listAdapter = new TrackListAdapter(getActivity());
 	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.fragment_track_grid, container, false);
+		View view = inflater.inflate(R.layout.fragment_track_grid, container,
+				false);
 
 		// Set the adapter
-		mListView = (AbsListView) view.findViewById(android.R.id.list);
-		((AdapterView<ListAdapter>) mListView).setAdapter(mAdapter);
+		listView = (AbsListView) view.findViewById(android.R.id.list);
+		listView.setAdapter(listAdapter);
 
 		// Set OnItemClickListener so we can be notified on item clicks
-		mListView.setOnItemClickListener(this);
+		listView.setOnItemClickListener(this);
 
 		return view;
 	}
@@ -86,7 +119,7 @@ public class TrackFragment extends Fragment implements
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
 		try {
-			mListener = (OnFragmentInteractionListener) activity;
+			listener = (OnFragmentInteractionListener) activity;
 		} catch (ClassCastException e) {
 			throw new ClassCastException(activity.toString()
 					+ " must implement OnFragmentInteractionListener");
@@ -96,17 +129,16 @@ public class TrackFragment extends Fragment implements
 	@Override
 	public void onDetach() {
 		super.onDetach();
-		mListener = null;
+		listener = null;
 	}
 
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position,
 			long id) {
-		if (null != mListener) {
+		if (null != listener) {
 			// Notify the active callbacks interface (the activity, if the
 			// fragment is attached to one) that an item has been selected.
-			mListener
-					.onFragmentInteraction(id);
+			listener.onFragmentInteraction(id);
 		}
 	}
 
@@ -116,11 +148,33 @@ public class TrackFragment extends Fragment implements
 	 * to supply the text it should use.
 	 */
 	public void setEmptyText(CharSequence emptyText) {
-		View emptyView = mListView.getEmptyView();
+		View emptyView = listView.getEmptyView();
 
 		if (emptyText instanceof TextView) {
 			((TextView) emptyView).setText(emptyText);
 		}
+	}
+
+	public Callback<Track[]> generateCallback() {
+		return new Callback<Track[]>() {
+			@Override
+			public void success(Track[] tracks, Response response) {
+				if (BuildConfig.DEBUG) {
+					Log.d(TAG,
+							String.format("Received %1d tracks", tracks.length));
+				}
+				listAdapter.addTracks(Arrays.asList(tracks));
+			}
+
+			@Override
+			public void failure(RetrofitError retrofitError) {
+				if (BuildConfig.DEBUG) {
+					Log.d(TAG, "Error fetching tracks, \n", retrofitError);
+				}
+				Crouton.showText(getActivity(), R.string.error_tracks_fetch,
+						Style.ALERT);
+			}
+		};
 	}
 
 	/**
@@ -135,6 +189,10 @@ public class TrackFragment extends Fragment implements
 	public interface OnFragmentInteractionListener {
 		// TODO: Update argument type and name
 		public void onFragmentInteraction(long id);
+	}
+
+	public enum Endpoint {
+		LATEST, FEATURED, RANDOM;
 	}
 
 }

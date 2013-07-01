@@ -1,6 +1,7 @@
 package org.codeweaver.eqbeats.adapters;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,10 +12,10 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import org.codeweaver.eqbeats.R;
-import org.codeweaver.eqbeats.model.Media;
 import org.codeweaver.eqbeats.model.Track;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -27,26 +28,12 @@ public class TrackListAdapter extends BaseAdapter {
 
 	public TrackListAdapter(Context context) {
 		this.context = context;
-		tracks = new ArrayList<Track>() {
-			{
-				add(new Track());
-				add(new Track());
-				add(new Track());
-				add(new Track());
-				add(new Track());
-				add(new Track());
-				add(new Track());
-				add(new Track());
-			}
-		};
-		for (int i = 0; i < tracks.size(); i++) {
-			tracks.get(i).setTitle("Track " + i);
-			tracks.get(i).setId(i);
-            tracks.get(i).setDownload(new Media());
-            if (i % 2 == 0) {
-				tracks.get(i).getDownload().setArt("http://thisisntreal.com");
-			}
-		}
+		tracks = new ArrayList<Track>();
+	}
+
+	public void addTracks(Collection<Track> tracks) {
+		this.tracks.addAll(tracks);
+		notifyDataSetChanged();
 	}
 
 	@Override
@@ -68,32 +55,43 @@ public class TrackListAdapter extends BaseAdapter {
 	public View getView(int position, View convertView, ViewGroup parent) {
 
 		ImageView image;
-		TextView text;
+		TextView title;
+		TextView artist;
 
 		if (convertView == null) {
 			convertView = LayoutInflater.from(context).inflate(
 					R.layout.grid_item_track, null);
 			image = (ImageView) convertView.findViewById(R.id.track_art);
-			text = (TextView) convertView.findViewById(R.id.track_title);
+			title = (TextView) convertView.findViewById(R.id.track_title);
+			artist = (TextView) convertView.findViewById(R.id.track_artist);
 
 			convertView.setTag(R.id.track_art, image);
-			convertView.setTag(R.id.track_title, text);
+			convertView.setTag(R.id.track_title, title);
+			convertView.setTag(R.id.track_artist, artist);
 		} else {
 			image = (ImageView) convertView.getTag(R.id.track_art);
-			text = (TextView) convertView.getTag(R.id.track_title);
+			title = (TextView) convertView.getTag(R.id.track_title);
+			artist = (TextView) convertView.getTag(R.id.track_artist);
 		}
 
+		Resources res = context.getResources();
 		Track track = getItem(position);
-		text.setText(track.getTitle());
+		title.setText(track.getTitle());
+		artist.setText(res.getString(R.string.track_artist_text, track
+				.getArtist().getName()));
 		if (track.getDownload().getArt() != null) {
 			Picasso.with(context)//
 					.load(track.getDownload().getArt())//
 					.placeholder(R.drawable.ic_logo)//
 					.error(R.drawable.ic_logo)//
+					.resizeDimen(R.dimen.art_width, R.dimen.art_width)//
+					.centerCrop()//
 					.into(image);
 		} else {
 			Picasso.with(context)//
 					.load(R.drawable.ic_logo)//
+					.resizeDimen(R.dimen.art_width, R.dimen.art_width)//
+					.centerCrop()//
 					.into(image);
 		}
 

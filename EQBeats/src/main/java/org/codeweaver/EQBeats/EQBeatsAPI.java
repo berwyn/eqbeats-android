@@ -34,19 +34,19 @@ public interface EQBeatsAPI {
 	@GET("/tracks/random/json")
 	public void getRandomTracks(Callback<Track[]> callback);
 
-	public static class Builder {
+	public class Builder {
 
-		public static EQBeatsAPI build() {
+		public EQBeatsAPI build() {
 			return build(new Gson());
 		}
 
-        public static EQBeatsAPI build(Gson gson) {
-            return new RestAdapter.Builder()//
-                    .setServer(BASE_URL)//
-                    .setConverter(new GsonConverter(gson))//
-                    .build()//
-                    .create(EQBeatsAPI.class);
-        }
+		public EQBeatsAPI build(Gson gson) {
+			return new RestAdapter.Builder()//
+					.setServer(BASE_URL)//
+					.setConverter(new GsonConverter(gson))//
+					.build()//
+					.create(EQBeatsAPI.class);
+		}
 
 	}
 
