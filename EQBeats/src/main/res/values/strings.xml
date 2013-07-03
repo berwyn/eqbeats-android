@@ -11,4 +11,10 @@
     <string name="error_tracks_fetch">Couldn\'t get the tracks you requested</string>
     <string name="track_artist_text">by %1s</string>
 
+    <!-- Track Playing strings -->
+    <string name="notification_track_playing_ticker">%1$s by %2$s</string>
+    <string name="notification_track_playing_title">%1$s</string>
+    <string name="notification_track_playing_subtext">by %1$s</string>
+    <string name="notification_track_playing_bigtext_summary">EQBeats</string>
+
 </resources>

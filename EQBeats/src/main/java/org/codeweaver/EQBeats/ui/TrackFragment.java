@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
+import android.widget.RemoteViews;
 import android.widget.TextView;
 
 import org.codeweaver.eqbeats.BuildConfig;
@@ -138,6 +139,9 @@ public class TrackFragment extends Fragment implements
 		if (null != listener) {
 			// Notify the active callbacks interface (the activity, if the
 			// fragment is attached to one) that an item has been selected.
+			TrackPlayingNotification.notify(getActivity(), listAdapter
+					.getItem(position), new RemoteViews(getActivity()
+					.getPackageName(), R.layout.notification_tracks_playing));
 			listener.onFragmentInteraction(id);
 		}
 	}

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="130dp"
+                android:minHeight="130dp"
+                android:background="#181818">
+
+    <ImageView
+            android:id="@+id/notification_art"
+            android:layout_width="@dimen/notification_height"
+            android:layout_height="@dimen/notification_height"
+            android:layout_alignParentLeft="true"
+            android:src="@drawable/ic_logo"
+            android:background="#FFF"
+            android:scaleType="centerCrop"/>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="8dp"
+            android:layout_toRightOf="@id/notification_art">
+
+        <TextView
+                android:id="@+id/notification_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@android:style/TextAppearance.StatusBar.EventContent.Title"
+                android:singleLine="true"
+                android:text="A Ditzy Delivery [Electro Remake]"/>
+
+        <TextView
+                android:id="@+id/notification_artist"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@android:style/TextAppearance.StatusBar.EventContent"
+                android:singleLine="true"
+                android:text="Flutterlover"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+            android:id="@+id/notification_button_host"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_toRightOf="@id/notification_art"
+            android:divider="?android:listDivider"
+            android:showDividers="middle"
+            android:dividerPadding="12dp"
+            android:layout_alignParentBottom="true">
+
+        <ImageButton
+                android:background="?android:selectableItemBackground"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:src="@drawable/ic_action_playback_prev"/>
+
+        <ImageButton
+                android:background="?android:selectableItemBackground"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:src="@drawable/ic_action_playback_pause"/>
+
+        <ImageButton
+                android:background="?android:selectableItemBackground"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:src="@drawable/ic_action_playback_next"/>
+
+    </LinearLayout>
+
+    <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="#33CDCDCD"
+            android:layout_toRightOf="@id/notification_art"
+            android:layout_above="@id/notification_button_host"/>
+
+</RelativeLayout>

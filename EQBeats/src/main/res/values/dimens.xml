@@ -3,4 +3,5 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="art_width">300dp</dimen>
+    <dimen name="notification_height">130dp</dimen>
 </resources>
