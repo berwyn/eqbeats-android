@@ -13,8 +13,8 @@ import android.widget.RemoteViews;
 import android.widget.TextView;
 
 import org.codeweaver.eqbeats.BuildConfig;
-import org.codeweaver.eqbeats.EQBeats;
-import org.codeweaver.eqbeats.EQBeatsAPI;
+import org.codeweaver.eqbeats.EqBeats;
+import org.codeweaver.eqbeats.EqBeatsAPI;
 import org.codeweaver.eqbeats.R;
 import org.codeweaver.eqbeats.adapters.TrackListAdapter;
 import org.codeweaver.eqbeats.model.Track;
@@ -80,7 +80,7 @@ public class TrackFragment extends Fragment implements
 			if (getArguments().containsKey(BUNDLE_KEY_ENDPOINT)) {
 				Endpoint endpoint = Endpoint.valueOf(getArguments().getString(
 						BUNDLE_KEY_ENDPOINT));
-				EQBeatsAPI api = ((EQBeats) getActivity().getApplication())
+				EqBeatsAPI api = ((EqBeats) getActivity().getApplication())
 						.getApi();
 				switch (endpoint) {
 					case FEATURED:

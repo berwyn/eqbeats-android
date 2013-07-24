@@ -110,7 +110,7 @@ public class TrackPlayingNotification {
 										.setSummaryText(summary))//
 
 						// Set the Actions for 4.1+ devices
-						// TODO: Add Back, Play/Pause, and Next actions
+						// TODO: Add Play/Pause, and Next actions
 
 						// Don't dismiss the notification when it's touched
 						.setAutoCancel(false);

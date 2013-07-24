@@ -5,12 +5,12 @@ import org.codeweaver.eqbeats.util.NetworkStatusProducerApplication;
 /**
  * Created by Berwyn Codeweaver on 23/06/13.
  */
-public class EQBeats extends NetworkStatusProducerApplication {
+public class EqBeats extends NetworkStatusProducerApplication {
 
-	private EQBeatsAPI	api;
+	private EqBeatsAPI api;
 
-	public EQBeatsAPI getApi() {
-		if (api == null) api = new EQBeatsAPI.Builder().build();
+	public EqBeatsAPI getApi() {
+		if (api == null) api = new EqBeatsAPI.Builder().build();
 		return api;
 	}
 
