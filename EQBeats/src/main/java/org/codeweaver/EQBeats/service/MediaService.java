@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.codeweaver.eqbeats.services;
+package org.codeweaver.eqbeats.service;
 
 import android.app.Service;
 import android.content.Intent;

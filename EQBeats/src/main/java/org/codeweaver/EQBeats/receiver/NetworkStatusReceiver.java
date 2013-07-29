@@ -1,4 +1,4 @@
-package org.codeweaver.eqbeats.receivers;
+package org.codeweaver.eqbeats.receiver;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

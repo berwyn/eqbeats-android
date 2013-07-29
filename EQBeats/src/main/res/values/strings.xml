@@ -10,11 +10,25 @@
     <string name="error_track_fetch">Couldn\'t get the track you requested</string>
     <string name="error_tracks_fetch">Couldn\'t get the tracks you requested</string>
     <string name="track_artist_text">by %1s</string>
+    <string name="artist_lookup_error">Couldn\'t lookup the artist you requsted</string>
+    <string name="song_count">%d songs</string>
+
+    <!-- Pin Progress strings -->
+    <string name="content_desc_pinned_downloaded">Pinned to device and downloaded</string>
+    <string name="content_desc_pinned_downloading">Pinned to device and downloading</string>
+    <string name="content_desc_pinned_not_downloaded">Pinned to device and waiting to download
+    </string>
+
+    <string name="content_desc_unpinned_downloaded">Temporarily downloaded</string>
+    <string name="content_desc_unpinned_downloading">Temporarily downloading</string>
+    <string name="content_desc_unpinned_not_downloaded">Not downloaded</string>
 
     <!-- Track Playing strings -->
     <string name="notification_track_playing_ticker">%1$s by %2$s</string>
     <string name="notification_track_playing_title">%1$s</string>
     <string name="notification_track_playing_subtext">by %1$s</string>
     <string name="notification_track_playing_bigtext_summary">EqBeats</string>
+    <string name="title_activity_user">User</string>
+    <string name="hello_world">Hello world!</string>
 
 </resources>

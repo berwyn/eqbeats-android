@@ -12,45 +12,45 @@ import org.codeweaver.eqbeats.R;
  */
 public class SquareImage extends ImageView {
 
-	public static enum FixedSide {
-		width, height
-	}
+    public static enum FixedSide {
+        width, height
+    }
 
-	private FixedSide	fixedSide	= FixedSide.width;
+    private FixedSide fixedSide = FixedSide.width;
 
-	public SquareImage(Context context) {
-		super(context);
-	}
+    public SquareImage(Context context) {
+        super(context);
+    }
 
-	public SquareImage(Context context, AttributeSet attrs) {
-		super(context, attrs);
-		init(attrs);
-	}
-
-	public SquareImage(Context context, AttributeSet attrs, int defStyle) {
-		super(context, attrs, defStyle);
+    public SquareImage(Context context, AttributeSet attrs) {
+        super(context, attrs);
         init(attrs);
-	}
+    }
 
-	int	squareDimen	= 1;
+    public SquareImage(Context context, AttributeSet attrs, int defStyle) {
+        super(context, attrs, defStyle);
+        init(attrs);
+    }
 
-	@Override
-	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+    int squareDimen = 1;
 
-		int size = (fixedSide == FixedSide.width) ? getMeasuredWidth()
-				: getMeasuredHeight();
-		if (size > squareDimen) {
-			squareDimen = size;
-		}
-		setMeasuredDimension(squareDimen, squareDimen);
-	}
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+
+        int size = (fixedSide == FixedSide.width) ? getMeasuredWidth()
+                : getMeasuredHeight();
+        if (size > squareDimen) {
+            squareDimen = size;
+        }
+        setMeasuredDimension(squareDimen, squareDimen);
+    }
 
     private void init(AttributeSet attrs) {
         TypedArray array = getContext().obtainStyledAttributes(attrs,
                 R.styleable.SquareImage);
-        fixedSide = FixedSide.valueOf(array
-                .getString(R.styleable.SquareImage_fixedSide));
+        fixedSide = FixedSide.values()[array.getInt(
+                R.styleable.SquareImage_fixedSide, 0)];
         if (fixedSide == null) {
             fixedSide = FixedSide.width;
         }

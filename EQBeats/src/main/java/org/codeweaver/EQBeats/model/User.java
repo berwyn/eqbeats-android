@@ -5,10 +5,11 @@ package org.codeweaver.eqbeats.model;
  */
 public class User extends Model {
 
-	private String		name;
-	private String		avatar;
-	private Track[]		tracks;
-	private Playlist[]	playlists;
+    private String     name;
+    private String     avatar;
+    private Track[]    tracks;
+    private long[]     trackIds;
+    private Playlist[] playlists;
 
     public String getName() {
         return name;
@@ -32,6 +33,14 @@ public class User extends Model {
 
     public void setTracks(Track[] tracks) {
         this.tracks = tracks;
+    }
+
+    public long[] getTrackIds() {
+        return trackIds;
+    }
+
+    public void setTrackIds(long[] trackIds) {
+        this.trackIds = trackIds;
     }
 
     public Playlist[] getPlaylists() {
