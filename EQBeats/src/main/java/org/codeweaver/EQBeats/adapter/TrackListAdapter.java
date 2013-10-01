@@ -1,7 +1,24 @@
+/*
+ * Copyright (C) 2013 Berwyn Codeweaver
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package org.codeweaver.eqbeats.adapter;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.drawable.AnimationDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,20 +27,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.RequestCreator;
 
 import org.codeweaver.eqbeats.BuildConfig;
-import org.codeweaver.eqbeats.EqBeatsAPI;
 import org.codeweaver.eqbeats.R;
 import org.codeweaver.eqbeats.model.Track;
-import org.codeweaver.eqbeats.model.User;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-
-import retrofit.Callback;
-import retrofit.RetrofitError;
-import retrofit.client.Response;
 
 /**
  * Created by Berwyn Codeweaver on 23/06/13.
@@ -91,19 +103,17 @@ public class TrackListAdapter extends BaseAdapter {
         title.setText(track.getTitle());
         artist.setText(res.getString(R.string.track_artist_text, track
                 .getArtist().getName()));
+        RequestCreator _rb;
         if (track.getDownload().getArt() != null) {
-            picasso.load(track.getDownload().getArt())//
-                    .placeholder(R.drawable.ic_logo)//
-                    .error(R.drawable.ic_logo)//
-                    .resizeDimen(R.dimen.art_width, R.dimen.art_height)//
-                    .centerCrop()//
-                    .into(image);
+            _rb = picasso.load(track.getDownload().getArt());
         } else {
-            picasso.load(R.drawable.ic_logo)//
-                    .resizeDimen(R.dimen.art_width, R.dimen.art_height)//
-                    .centerCrop()//
-                    .into(image);
+            _rb = picasso.load(R.drawable.ic_art_filler);
         }
+        _rb.placeholder(R.drawable.ic_art_filler)//
+                .error(R.drawable.ic_art_filler)//
+                .resizeDimen(R.dimen.art_width, R.dimen.art_height)//
+                .centerCrop()//
+                .into(image);
 
         return convertView;
     }

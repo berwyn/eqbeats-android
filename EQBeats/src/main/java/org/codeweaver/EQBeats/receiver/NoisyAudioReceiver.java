@@ -14,21 +14,21 @@
  * limitations under the License.
  */
 
-package org.codeweaver.eqbeats.event;
+package org.codeweaver.eqbeats.receiver;
+
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.media.AudioManager;
 
 /**
- * Created by Berwyn Codeweaver on 11/07/13.
+ * Created by Berwyn Codeweaver on 30/09/2013.
  */
-public class MediaPlayerErrorEvent {
-
-	private final Throwable	error;
-
-	public MediaPlayerErrorEvent(Throwable error) {
-		this.error = error;
-	}
-
-	public Throwable getError() {
-		return this.error;
-	}
-
+public class NoisyAudioReceiver extends BroadcastReceiver {
+    @Override
+    public void onReceive(Context context, Intent intent) {
+        if(intent.getAction().equals(AudioManager.ACTION_AUDIO_BECOMING_NOISY)){
+            // We need to pause the audio here
+        }
+    }
 }

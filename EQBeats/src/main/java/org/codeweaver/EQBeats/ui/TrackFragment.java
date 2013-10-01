@@ -1,3 +1,19 @@
+/*
+ * Copyright (C) 2013 Berwyn Codeweaver
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package org.codeweaver.eqbeats.ui;
 
 import android.app.Activity;
@@ -42,6 +58,7 @@ public class TrackFragment extends Fragment implements
     private static final String           TAG                 = "Track Fragment";
 
     private OnFragmentInteractionListener listener;
+    private EqBeatsAPI api;
 
     /**
      * The fragment's ListView/GridView.
@@ -60,6 +77,7 @@ public class TrackFragment extends Fragment implements
         Bundle args = new Bundle();
         args.putString(BUNDLE_KEY_ENDPOINT, endpoint.name());
         fragment.setArguments(args);
+        fragment.api = new EqBeatsAPI.Builder().build();
         return fragment;
     }
 
@@ -79,16 +97,17 @@ public class TrackFragment extends Fragment implements
             if (getArguments().containsKey(BUNDLE_KEY_ENDPOINT)) {
                 Endpoint endpoint = Endpoint.valueOf(getArguments().getString(
                         BUNDLE_KEY_ENDPOINT));
+                Callback<Track[]> callback = generateCallback();
                 switch (endpoint) {
                     case FEATURED:
-                        EqBeatsAPI.getFeaturedTracks(generateCallback());
+                        api.getFeaturedTracks(callback);
                         break;
                     case LATEST:
-                        EqBeatsAPI.getLatestTracks(generateCallback());
+                        api.getLatestTracks(callback);
                         break;
                     case RANDOM:
                     default:
-                        EqBeatsAPI.getRandomTracks(generateCallback());
+                        api.getRandomTracks(callback);
                         break;
                 }
             }

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/rarity_walk_01" android:duration="22" />
+    <item android:drawable="@drawable/rarity_walk_02" android:duration="22" />
+    <item android:drawable="@drawable/rarity_walk_03" android:duration="22" />
+    <item android:drawable="@drawable/rarity_walk_04" android:duration="22" />
+    <item android:drawable="@drawable/rarity_walk_05" android:duration="22" />
+    <item android:drawable="@drawable/rarity_walk_06" android:duration="22" />
+    <item android:drawable="@drawable/rarity_walk_07" android:duration="22" />
+    <item android:drawable="@drawable/rarity_walk_08" android:duration="22" />
+    <item android:drawable="@drawable/rarity_walk_09" android:duration="22" />
+    <item android:drawable="@drawable/rarity_walk_10" android:duration="22" />
+    <item android:drawable="@drawable/rarity_walk_11" android:duration="22" />
+</animation-list>

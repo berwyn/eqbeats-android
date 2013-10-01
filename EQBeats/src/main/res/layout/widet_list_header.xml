@@ -67,6 +67,6 @@
             android:layout_height="96dp"
             android:layout_marginLeft="16dp"
             android:background="@drawable/image_border"
-            android:src="@drawable/ic_filler_art"/>
+            android:src="@drawable/ic_art_filler"/>
 
 </FrameLayout>

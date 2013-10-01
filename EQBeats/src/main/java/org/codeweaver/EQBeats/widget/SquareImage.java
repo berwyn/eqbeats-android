@@ -1,3 +1,11 @@
+/*
+ * I don't even know what to put here :|
+ * Based on code from Square's Picasso project, found
+ * at https://square.github.io/picasso
+ *
+ * So, Apache license, copyright Square, Inc.?
+ */
+
 package org.codeweaver.eqbeats.widget;
 
 import android.content.Context;

@@ -1,14 +1,37 @@
+/*
+ * Copyright (C) 2013 Berwyn Codeweaver
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package org.codeweaver.eqbeats.model;
+
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.field.ForeignCollectionField;
+import com.j256.ormlite.table.DatabaseTable;
 
 /**
  * Created by Berwyn Codeweaver on 23/06/13.
  */
 public class User extends Model {
 
+    @DatabaseField
     private String     name;
+    @DatabaseField
     private String     avatar;
+    @ForeignCollectionField(eager = false)
     private Track[]    tracks;
-    private long[]     trackIds;
+    @ForeignCollectionField(eager = false)
     private Playlist[] playlists;
 
     public String getName() {
@@ -33,14 +56,6 @@ public class User extends Model {
 
     public void setTracks(Track[] tracks) {
         this.tracks = tracks;
-    }
-
-    public long[] getTrackIds() {
-        return trackIds;
-    }
-
-    public void setTrackIds(long[] trackIds) {
-        this.trackIds = trackIds;
     }
 
     public Playlist[] getPlaylists() {
