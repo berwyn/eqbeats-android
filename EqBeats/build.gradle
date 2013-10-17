@@ -3,7 +3,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:0.5.+'
+        classpath 'com.android.tools.build:gradle:0.6.+'
     }
 }
 apply plugin: 'android'
@@ -29,14 +29,14 @@ dependencies {
     compile('de.keyboardsurfer.android.widget:crouton:1.8.+') {
         exclude group: 'com.google.android', module: 'support-v4'
     }
-    compile('com.github.frankiesardo:icepick:2.+') {
+    compile('com.github.frankiesardo:icepick:2.1') {
         exclude group: 'com.google.android', module: 'support-v4'
     }
 }
 
 android {
     compileSdkVersion 18
-    buildToolsVersion "18.0.1"
+    buildToolsVersion "18.1.1"
 
     defaultConfig {
         minSdkVersion 14

@@ -159,10 +159,7 @@ public class TrackFragment extends Fragment implements
             // .getItem(position), new RemoteViews(getActivity()
             // .getPackageName(), R.layout.notification_tracks_playing));
             // listener.onFragmentInteraction(id);
-            Intent i = new Intent(getActivity(), UserActivity.class);
-            i.putExtra(UserActivity.KEY_ARTIST_ID, listAdapter
-                    .getItem(position).getArtist().getId());
-            startActivity(i);
+
         }
     }
 
