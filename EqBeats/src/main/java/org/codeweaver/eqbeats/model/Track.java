@@ -16,20 +16,14 @@
 
 package org.codeweaver.eqbeats.model;
 
-import com.j256.ormlite.field.DatabaseField;
-
 /**
  * Created by Berwyn Codeweaver on 23/06/13.
  */
 public class Track extends Model {
 
-    @DatabaseField
     private String title;
-    @DatabaseField(foreignAutoRefresh = true, foreign = true)
     private User   artist;
-    @DatabaseField(foreignAutoRefresh = true, foreign = true)
     private Media  download;
-    @DatabaseField(foreignAutoRefresh = true, foreign = true)
     private Media  stream;
 
     public String getTitle() {

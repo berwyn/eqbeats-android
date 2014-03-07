@@ -17,20 +17,15 @@
 package org.codeweaver.eqbeats.model;
 
 import com.google.gson.annotations.SerializedName;
-import com.j256.ormlite.field.DatabaseField;
 
 /**
  * Created by Berwyn Codeweaver on 23/06/13.
  */
 public abstract class Model {
 
-    @DatabaseField(id = true)
 	private long	id;
-    @DatabaseField
 	private String	link;
-    @DatabaseField
 	private String	description;
-    @DatabaseField
 	@SerializedName("html_description")
 	private String	htmlDescription;
 

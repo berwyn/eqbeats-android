@@ -33,6 +33,7 @@ import retrofit.http.Path;
 public interface EqBeatsAPI {
 
     public static final String BASE_URL = "https://eqbeats.org";
+    public static final EqBeatsAPI instance = new Builder().build();
 
     @GET("/user/{id}/json")
     public void getUser(@Path("id") long id, Callback<User> callback);
